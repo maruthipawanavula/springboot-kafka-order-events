@@ -112,6 +112,10 @@ docker compose exec kafka kafka-console-consumer \
 
 ## Tests
 
+[![CI](https://github.com/maruthipawanavula/springboot-kafka-order-events/actions/workflows/ci.yml/badge.svg)](https://github.com/maruthipawanavula/springboot-kafka-order-events/actions/workflows/ci.yml)
+
+Every push and pull request is built and tested by the GitHub Actions CI workflow (`.github/workflows/ci.yml`, JDK 17, `mvn -B verify`). The suite is unit and MockMvc slice tests only, so it runs without Kafka or Postgres services.
+
 ```bash
 mvn test
 ```
