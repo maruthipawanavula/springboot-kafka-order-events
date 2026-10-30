@@ -11,6 +11,9 @@ public class KafkaTopicConfig {
 
     public static final String ORDER_EVENTS_TOPIC = "order-events";
 
+    /** Dead-letter topic for records that fail processing after retries. */
+    public static final String ORDER_EVENTS_DLT_TOPIC = ORDER_EVENTS_TOPIC + ".DLT";
+
     @Value("${app.kafka.order-events.partitions:3}")
     private int partitions;
 
@@ -20,6 +23,14 @@ public class KafkaTopicConfig {
     @Bean
     public NewTopic orderEventsTopic() {
         return TopicBuilder.name(ORDER_EVENTS_TOPIC)
+                .partitions(partitions)
+                .replicas(replicas)
+                .build();
+    }
+
+    @Bean
+    public NewTopic orderEventsDltTopic() {
+        return TopicBuilder.name(ORDER_EVENTS_DLT_TOPIC)
                 .partitions(partitions)
                 .replicas(replicas)
                 .build();
